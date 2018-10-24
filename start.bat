@@ -1,0 +1,2 @@
+node tryhard.js
+pause
