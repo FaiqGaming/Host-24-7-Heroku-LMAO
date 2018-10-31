@@ -4,8 +4,7 @@ const superagent = require("snekfetch");
 const snek = require('snekfetch');
 const Commando = require("discord.js-commando");
 const path = require("path");
-const client = new Commando.Client({
-})
+const client = new Discord.Client();
 const oneLine = require("common-tags");
 const Discord = require("discord.js");
 const randomPuppy = require('random-puppy');
