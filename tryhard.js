@@ -35,24 +35,6 @@ const active = new Map();
 let cooldown = new Set();
 let cdseconds = 5;
 
-// Uptime Robot 24/7 Host
-//*************************************************************
-const http = require('http');
-const express = require('express');
-const app = express();
-
-app.listen(process.env.PORT);
-setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 280000);
-
-app.use(express.static('public'));
-
-app.get("/", function (request, response) {
-  response.sendFile(__dirname + '/views/index.html');
-}); 
-//*************************************************************
-
 function changing_status() {
   let status = [`Say $help || Released v24`, `With ${client.users.size} Users`, `With ${client.guilds.size} Server`, `With ${client.channels.size} Channels`, `24/7 Online Forever`, `Hosted By Glitch`]
   let random = status[Math.floor(Math.random() * status.length)]
