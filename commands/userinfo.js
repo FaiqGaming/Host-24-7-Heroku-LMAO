@@ -41,7 +41,7 @@ exports.run = async(client, message, args => {
             .setTimestamp() //The timestamp of this embed
 
         message.channel.send(UserInfo);
-    }
+    })
 })
 
 exports.help = {
