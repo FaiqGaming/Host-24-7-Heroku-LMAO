@@ -1,2 +1,2 @@
-node tryhard.js
+node index.js
 pause
