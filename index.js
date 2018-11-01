@@ -34,15 +34,6 @@ let cdseconds = 5;
 const func = require("./functions.js");
 const db = require("quick.db");
 const client = new Discord.Client();
-const Discord = require("discord.js");
-const config = require("./config.json");
-const prefix = config.prefix;
-
-const client = new Discord.Client({
-  shardId: 15,
-  shardCount: 2,
-  fetchAllMembers: true
-})
 
 function changing_status() {
   let status = [`Say (help || Released v24`, `With ${client.users.size} Users`, `With ${client.guilds.size} Server`, `With ${client.channels.size} Channels`, `24/7 Online Forever`, `Hosted By Glitch`]
