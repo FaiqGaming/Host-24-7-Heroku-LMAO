@@ -10,8 +10,6 @@ const utils = require('./global/utils');
 const moment = require("moment");
 const ms = require("ms");
 const cpuStat = require("cpu-stat");
-const dbl = require('dblapi.js');
-const DBL = new dbl(process.env.DBL);
 const math = require("mathjs"); // mathjs for check const of requirering of math.js 
 var osu = require('os-utils');
 var os = require('os');
@@ -47,10 +45,6 @@ client.on('ready', () => {
   console.log(`${client.user.tag} Bot Has Online Now With Player Using ${client.users.size} Users And Using ${client.channels.size} Channels And ${client.guilds.size} Servers!`);
   client.user.setStatus('dnd');
   setInterval(changing_status, 9000);
-})
-
-DBL.getBot("459152313467011072").then(bot => {
-  console.log(bot.username) // "TryHard"
 })
 
 client.on("guildMemberAdd", async member => {
