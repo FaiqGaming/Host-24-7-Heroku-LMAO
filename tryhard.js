@@ -1,4 +1,5 @@
 const botconfig = require("./botconfig.json");
+const Discord = require("discord.js");
 const ytdl = require("ytdl-core");
 const superagent = require("snekfetch");
 const snek = require('snekfetch');
