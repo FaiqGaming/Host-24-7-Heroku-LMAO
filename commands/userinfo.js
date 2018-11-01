@@ -18,24 +18,20 @@ exports.run = async (client, message, args) => {
 	
 	//Discord rich embed
     const embed = new Discord.RichEmbed()
-                    let user = message.author;
-                    var member = message.guild.member(user) 
-                    {message.channel.sendMessage()};
-                    let embed = new Discord.RichEmbed()
-                    .setDescription("Here is the information: ")
-                    .setAuthor(`${user.username}#${user.discriminator}`, user.displayAvatarURL)
-                    .setThumbnail(user.displayAvatarURL)
-                    .addField('Username', user.username, true)
-                    .addField('ID', user.id, true)
-                    .addField('Discriminator', `#${user.discriminator}`, true)
-                    .addField('Nickname', `${member.nickname ? '' + member.nickname + '' : 'None'}`, true)
-                    .addField('Registered', new Date(user.createdAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
-                    .addField('Joined', new Date(member.joinedAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
-                    .addField('Status', StatusMap[user.presence.status]+' '+StatusText[user.presence.status], true)
-                    .addField('Member Type', ngebot[user.bot], true)
-                    .setColor(ColorMap[user.presence.status])
-                    .setThumbnail(user.displayAvatarURL)
-                    message.channel.sendMessage(embed)
+          .setDescription("UserInfo Information")
+          .setAuthor(`${user.username}#${user.discriminator}`, user.displayAvatarURL)
+          .setThumbnail(user.displayAvatarURL)
+          .addField('Username', user.username, true)
+          .addField('ID', user.id, true)
+          .addField('Discriminator', `#${user.discriminator}`, true)
+          .addField('Nickname', `${member.nickname ? '' + member.nickname + '' : 'None'}`, true)
+          .addField('Registered', new Date(user.createdAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
+          .addField('Joined', new Date(member.joinedAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
+          .addField('Status', StatusMap[user.presence.status]+' '+StatusText[user.presence.status], true)
+          .addField('Member Type', ngebot[user.bot], true)
+          .setColor(ColorMap[user.presence.status])
+          .setThumbnail(user.displayAvatarURL)
+           message.channel.send(embed)
 }
 
 exports.help = {
