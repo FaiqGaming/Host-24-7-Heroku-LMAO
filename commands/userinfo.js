@@ -18,19 +18,24 @@ exports.run = async (client, message, args) => {
 	
 	//Discord rich embed
     const embed = new Discord.RichEmbed()
-		.setColor('RANDOM')
-		.setThumbnail(user.avatarURL)
-		.setTitle(`${user.username}#${user.discriminator}`)
-		.addField("UsernameID:", `${user.id}`, true)
-		.addField("Username Discord", `${member.nickname !== null ? `${member.nickname}` : 'None'}`, true)
-		.addField("Account Has Created", `${moment.utc(user.createdAt).format('dddd, MMMM Do YYYY, HH:mm:ss')}`, true)
-		.addField("Account Has Joined Our Discord", `${moment.utc(member.joinedAt).format('dddd, MMMM Do YYYY, HH:mm:ss')}`, true)
-		.addField("This Is A Bot", `${user.bot}`, true)
-		.addField("Status", `${user.presence.status}`, true)
-		.addField("Status Game Playing", `${user.presence.game ? user.presence.game.name : 'None'}`, true)
-		.addField("Roles", member.roles.map(roles => `${roles.name}`).join(', '), true)
-		.setFooter(`Replying to ${message.author.username}#${message.author.discriminator}`)
-     message.channel.send({embed});
+                    let user = message.author;
+                    var member = message.guild.member(user) 
+                    {message.channel.sendMessage()};
+                    let embed = new Discord.RichEmbed()
+                    .setDescription("Here is the information: ")
+                    .setAuthor(`${user.username}#${user.discriminator}`, user.displayAvatarURL)
+                    .setThumbnail(user.displayAvatarURL)
+                    .addField('Username', user.username, true)
+                    .addField('ID', user.id, true)
+                    .addField('Discriminator', `#${user.discriminator}`, true)
+                    .addField('Nickname', `${member.nickname ? '' + member.nickname + '' : 'None'}`, true)
+                    .addField('Registered', new Date(user.createdAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
+                    .addField('Joined', new Date(member.joinedAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
+                    .addField('Status', StatusMap[user.presence.status]+' '+StatusText[user.presence.status], true)
+                    .addField('Member Type', ngebot[user.bot], true)
+                    .setColor(ColorMap[user.presence.status])
+                    .setThumbnail(user.displayAvatarURL)
+                    message.channel.sendMessage(embed)
 }
 
 exports.help = {
