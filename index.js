@@ -34,6 +34,38 @@ let cdseconds = 5;
 const func = require("./functions.js");
 const db = require("quick.db");
 const client = new Discord.Client();
+//ini sourcenya
+const ColorMap = 
+                {
+                    'online' : '#00FF00',
+                    'idle' : '#FF8000',
+                    'streaming' : '#A901DB',
+                    'dnd' : '#FF0000',
+                    'offline' : '#848484'
+                };
+                const ngebot = 
+                {
+                    'true' : 'Bot User',
+                    'false' : 'Regular User'
+                };
+                const StatusMap = 
+                {
+                    'online' : `:online:`,
+                    'idle' : `:idle:`,
+                    'streaming' : `:streaming:`,
+                    'offline' : `:offline:`,
+                    'dnd' : `:dnd:`
+
+                };
+
+                const StatusText = 
+                {
+                    'online' : 'Online',
+                    'idle' : 'Idle',
+                    'dnd' : 'Do Not Disturb',
+                    'offline' : 'Offline',
+                    'streaming' : 'Streaming'
+                } 
 
 function changing_status() {
   let status = [`Say (help || Released v24`, `With ${client.users.size} Users`, `With ${client.guilds.size} Server`, `With ${client.channels.size} Channels`, `24/7 Online Forever`, `Hosted In Heroku`]
@@ -239,6 +271,29 @@ client.on("message", async message => {
       
     });
   }
+      
+if(cmd === `userinfo`){ 
+                {
+                    let user = message.author;
+                    var member = message.guild.member(user) 
+                    {message.channel.sendMessage()};
+                    let embed = new Discord.RichEmbed()
+                    .setDescription("Here is the information: ")
+                    .setAuthor(`${user.username}#${user.discriminator}`, user.displayAvatarURL)
+                    .setThumbnail(user.displayAvatarURL)
+                    .addField('Username', user.username, true)
+                    .addField('ID', user.id, true)
+                    .addField('Discriminator', `#${user.discriminator}`, true)
+                    .addField('Nickname', `${member.nickname ? '' + member.nickname + '' : 'None'}`, true)
+                    .addField('Registered', new Date(user.createdAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
+                    .addField('Joined', new Date(member.joinedAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
+                    .addField('Status', StatusMap[user.presence.status]+' '+StatusText[user.presence.status], true)
+                    .addField('Member Type', ngebot[user.bot], true)
+                    .setColor(ColorMap[user.presence.status])
+                    .setThumbnail(user.displayAvatarURL)
+                    message.channel.sendMessage(embed)
+                };
+}
 
   if (cmd === `remind`){
 
