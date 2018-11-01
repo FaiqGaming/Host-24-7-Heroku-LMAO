@@ -17,21 +17,68 @@ exports.run = async (client, message, args) => {
     const member = message.guild.member(user);
 	
 	//Discord rich embed
-    const embed = new Discord.RichEmbed()
-          .setDescription("UserInfo Information")
-          .setAuthor(`${user.username}#${user.discriminator}`, user.displayAvatarURL)
-          .setThumbnail(user.displayAvatarURL)
-          .addField('Username', user.username, true)
-          .addField('ID', user.id, true)
-          .addField('Discriminator', `#${user.discriminator}`, true)
-          .addField('Nickname', `${member.nickname ? '' + member.nickname + '' : 'None'}`, true)
-          .addField('Registered', new Date(user.createdAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
-          .addField('Joined', new Date(member.joinedAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
-          .addField('Status', StatusMap[user.presence.status]+' '+StatusText[user.presence.status], true)
-          .addField('Member Type', ngebot[user.bot], true)
-          .setColor(ColorMap[user.presence.status])
-          .setThumbnail(user.displayAvatarURL)
-           message.channel.send(embed)
+                  const embed = new Discord.RichEmbed()
+                        .setAuthor('Support our bot!', client.user.displayAvatarURL)
+                        .setDescription("Here's the special perks:")
+                        .setColor('#FFD800')
+                        .addField(':arrow_forward: Invite bot', `[Click here](${'https://discordapp.com/oauth2/authorize?client_id=481305515092213763&permissions=371776&scope=bot'})`, true)
+                        .addField(':earth_asia: Join my server', `[Click here](${'http://discord.gg/rKjFGps'})`, true)
+                        .addField(':pencil: Contact us', `[Click here](${'https://goo.gl/forms/0km4ybWuVWLQ83T33'})`, true)
+                        .addField('<:YouTube:506769226766483457> My Channel', `[Click here](${'https://www.youtube.com/user/rozivector1999'})`, true)
+                        .addField('<:twitch:506770621498392594> My Streaming', `[Click here](${'https://www.twitch.tv/rozivector'})`, true)
+                        .addField(':earth_asia: My Website', `[Click here](${'http://rozivector.blogspot.com'})`, true)
+                        .setFooter("Now support 24/7 online bot! Made with discord.js")
+                        message.channel.sendMessage(embed)
+                        message.channel.stopTyping(true);
+                    };
+
+        {
+
+            let comrade = message.content.slice(prefix.length).trim().split(' ');
+
+    
+                
+
+                const ColorMap = 
+                {
+                    'online' : '#00FF00',
+                    'idle' : '#FF8000',
+                    'streaming' : '#A901DB',
+                    'dnd' : '#FF0000',
+                    'offline' : '#848484'
+                };
+                const ngebot = 
+                {
+                    'true' : 'Bot User',
+                    'false' : 'Regular User'
+                };
+                const StatusMap = 
+                {
+                    'online' : `<:online:504813930313547776>`,
+                    'idle' : `<:idle:504813930321805333>`,
+                    'streaming' : `<:streaming:504813930309222400>`,
+                    'offline' : `<:offline:504813929780871191>`,
+                    'dnd' : `<:dnd:504813930246438912>`
+
+                };
+
+                const StatusText = 
+                {
+                    'online' : 'Online',
+                    'idle' : 'Idle',
+                    'dnd' : 'Do Not Disturb',
+                    'offline' : 'Offline',
+                    'streaming' : 'Streaming'
+                } 
+
+                const verlev = 
+                {
+                    '0' : 'None',
+                    '1' : 'Low',
+                    '2' : 'Medium',
+                    '3' : 'High',
+                    '4' : 'Very High'
+
 }
 
 exports.help = {
