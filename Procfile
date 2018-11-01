@@ -1,1 +1,1 @@
-worker: node tryhard.js
+worker: node index.js
