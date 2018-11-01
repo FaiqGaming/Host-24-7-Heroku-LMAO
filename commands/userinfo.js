@@ -1,7 +1,7 @@
 const Discord = require('discord.js'); // To Install Discord.js | Run This Command in Console/Terminal `npm install --save discordjs/discord.js`
 const client = new Discord.Client();
 
-exports.run = async(client, message, args) => {
+exports.run = async(client, message, args => {
 
             const UserInfo = new Discord.MessageEmbed()
 
@@ -42,7 +42,7 @@ exports.run = async(client, message, args) => {
 
         message.channel.send(UserInfo);
     }
-}
+})
 
 exports.help = {
   name: "userinfo"
