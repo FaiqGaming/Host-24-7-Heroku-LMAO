@@ -7,7 +7,6 @@ const Commando = require("discord.js-commando");
 const path = require("path");
 const client = new Discord.Client();
 const oneLine = require("common-tags");
-const Discord = require("discord.js");
 const randomPuppy = require('random-puppy');
 const moment = require("moment");
 const ms = require("ms");
