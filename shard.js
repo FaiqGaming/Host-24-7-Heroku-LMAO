@@ -1,7 +1,7 @@
 
 // TUTORIAL SHARDING (discord.js)
 const { ShardingManager } = require('discord.js');
-const TOKEN = `YOUR TOKEN HERE`; 
+const TOKEN = process.env.BOT_TOKEN; 
 const mainFile = "shard.js"; //GANTI INI!
 
 const shards = new ShardingManager(`${mainFile}`, {
