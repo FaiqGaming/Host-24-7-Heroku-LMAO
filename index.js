@@ -843,4 +843,4 @@ if(cmd === `shorten`){
   if (!cmd) return message.channel.send("invalid command");
 })
 
-client.login(process.env.TOKEN);
+client.login(process.env.BOT_TOKEN);
