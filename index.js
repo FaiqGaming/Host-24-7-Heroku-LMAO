@@ -850,4 +850,3 @@ if(cmd === `shorten`){
 })
 
 client.login(process.env.TOKEN);
-})
