@@ -36,7 +36,7 @@ const db = require("quick.db");
 const client = new Discord.Client();
 
 function changing_status() {
-  let status = [`Say (help || Released v24`, `With ${client.users.size} Users`, `With ${client.guilds.size} Server`, `With ${client.channels.size} Channels`, `24/7 Online Forever`, `Hosted By Glitch`]
+  let status = [`Say (help || Released v24`, `With ${client.users.size} Users`, `With ${client.guilds.size} Server`, `With ${client.channels.size} Channels`, `24/7 Online Forever`, `Hosted In Heroku`]
   let random = status[Math.floor(Math.random() * status.length)]
   client.user.setActivity(random)
 }
