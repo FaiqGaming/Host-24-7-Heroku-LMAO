@@ -42,7 +42,7 @@ exports.run = async(client, message, args => {
 
         message.channel.send(UserInfo);
     })
-})
+}
 
 exports.help = {
   name: "userinfo"
