@@ -883,7 +883,7 @@ if(cmd === `shorten`){
   if(cmd === `invite`){
     message.delete()
     let inviteEmbed = new Discord.RichEmbed()
-    .addField("Invite Your Own Bot","[Invite Links](https://discordapp.com/oauth2/authorize?client_id=459152313467011072&permissions=103996545&scope=bot)", true)
+    .addField("Invite The Our Bot","[Invite Links](https://discordapp.com/oauth2/authorize?client_id=459152313467011072&permissions=103996545&scope=bot)", true)
     message.channel.send(inviteEmbed)
   }
   
