@@ -4,7 +4,7 @@ const { ShardingManager } = require('discord.js');
 const TOKEN = process.env.BOT_TOKEN; 
 const mainFile = "shard.js"; //GANTI INI!
 
-const shards = new ShardingManager(`${mainFile}`, {
+const shards = new ShardingManager(`./index.js`, {
     token: process.env.BOT_TOKEN,
     totalShards: 1 //1 SAJA DULU ;v
 });
