@@ -1,11 +1,9 @@
-
-// TUTORIAL SHARDING (discord.js)
 const { ShardingManager } = require('discord.js');
 const TOKEN = process.env.BOT_TOKEN; 
 
 const shards = new ShardingManager(`./index.js`, {
     token: process.env.BOT_TOKEN,
-    totalShards: 1 //1 SAJA DULU ;v
+    totalShards: 1
 });
 
 shards.on('launch', shard => {
