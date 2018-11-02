@@ -50,11 +50,11 @@ const ColorMap =
                 };
                 const StatusMap = 
                 {
-                    'online' : `:onlinegif:`,
+                    'online' : `<:online:504813930313547776>`,
                     'idle' : `<:idle:504813930321805333>`,
                     'streaming' : `<:streaming:504813930309222400>`,
-                    'offline' : `:invisiblegif:`,
-                    'dnd' : `:dndgif:`
+                    'offline' : `<:offline:504813929780871191>`,
+                    'dnd' : `<:dnd:504813930246438912>`
 
                 };
 
@@ -68,7 +68,7 @@ const ColorMap =
                 } 
 
 function changing_status() {
-  let status = [`Say (help || Released v24`, `With ${client.users.size} Users`, `With ${client.guilds.size} Server`, `With ${client.channels.size} Channels`, `24/7 Online Forever`, `Hosted In Heroku`]
+  let status = [`Say (help || Released Now!`, `With ${client.users.size} Users`, `With ${client.guilds.size} Server`, `With ${client.channels.size} Channels`, `24/7 Online Forever`, `Hosted In Heroku`]
   let random = status[Math.floor(Math.random() * status.length)]
   client.user.setActivity(random)
 }
