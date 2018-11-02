@@ -50,11 +50,11 @@ const ColorMap =
                 };
                 const StatusMap = 
                 {
-                    'online' : `:online:`,
-                    'idle' : `:idle:`,
-                    'streaming' : `:streaming:`,
-                    'offline' : `:offline:`,
-                    'dnd' : `:dnd:`
+                    'online' : `<:online:504813930313547776>`,
+                    'idle' : `<:idle:504813930321805333>`,
+                    'streaming' : `<:streaming:504813930309222400>`,
+                    'offline' : `<:offline:504813929780871191>`,
+                    'dnd' : `<:dnd:504813930246438912>`
 
                 };
 
