@@ -1,7 +1,7 @@
 {
-  "prefix": "(",
-	"credits": "TryHard
+        "prefix": "(",
+	"credits": "TryHard",
 	"version": "v0.9.2",
 	"color": "RANDOM",
-	"token": "process.env.BOT_TOKEN
+	"token": "process.env.BOT_TOKEN"
 }
