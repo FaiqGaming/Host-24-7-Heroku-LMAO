@@ -1,4 +1,4 @@
-exports.run = async (music, message, args, queue) => {
+exports.run = async (message, args, queue) => {
 	const msg = message;
 	const serverQueue = queue.get(msg.guild.id);
 	if (!msg.member.voiceChannel) return msg.channel.send('You must join voice channel first');
