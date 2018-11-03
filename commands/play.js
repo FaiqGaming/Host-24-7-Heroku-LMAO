@@ -1,217 +1,117 @@
-const cfg = require("../config.json");
-const Discord = require('discord.js');
-const key = process.env.SERVER_YOUTUBE;
-const fs = require("fs");
-const moment = require("moment");
-const yt = require("ytdl-core");
-const YouTube = require("simple-youtube-api");
-const youtube = new YouTube(key);
-const opus = require("opusscript");
-const gyp = require("node-gyp");
+// This command will require 2 NPM Packages
+// `npm i ytdl-core node-opus`
+const ytdl = require("ytdl-core");
 
-exports.run = async(message, args, color, queue) => {
-  const args1 = message.content.split(' ');
-  const searchString = args1.slice(1).join(' ');
-  const url = args1[1] ? args1[1].replace(/<(.+)>/g, '$1') : '';
-  const serverQueue = queue.get(message.guild.id);
+exports.run = async (client, message, args, ops) => {
 
-  if (!searchString) return message.channel.send("The correct usage is **my!play [Song Name]/[Song URL]/[Playlist URL]**")
-  
-const voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel) return message.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
-    const permissions = voiceChannel.permissionsFor(music.user);
-    if (!permissions.has('CONNECT')) {
-      return message.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
-    } 
-    if (!permissions.has('SPEAK')) {
-      return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
-    }
+        message.delete()
+        // First, we need to check if the author is connected to voice channel.
+        if(!message.member.voiceChannel) return message.channel.send("Connect To VoiceChannel To Spawn Me!");
+        // if not, return & send a message to chat
+    
+        // Check if author input a url
+        if(!args[0]) return message.channel.send("Input A Text/Url On Your Commands To Play Our Music!");
 
-    if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-      const playlist = await youtube.getPlaylist(url);
-      const videos = await playlist.getVideos();
-      for (const video of Object.values(videos)) {
-        const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-        await handleVideo(video2, message, voiceChannel, true); // eslint-disable-line no-await-in-loop
-      }
-      return message.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
-    } else {
-      try {
-        var video = await youtube.getVideo(url);
-      } catch (error) {
-        try {
-          var videos = await youtube.searchVideos(searchString, 10);
-          let index = 0;
-          
-          
-          const embed = new Discord.RichEmbed()
-          .setTitle("Song Selection")
-          .setDescription(videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n'))
-          .setColor(color)
-          .setFooter("Please provide a value to select one of the search results ranging from 1-10.")
-          
-          
-          let msgtoDelete = await message.channel.send({embed: embed});
-          // eslint-disable-next-line max-depth
-          try {
-            var response = await message.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 11, {
-              maxMatches: 1,
-              time: 10000,
-              errors: ['time']
-            });
-            msgtoDelete.delete();
-          } catch (err) {
-            console.error(err);
-            const noPick = new Discord.RichEmbed()
-            .setDescription("No or invalid value entered, cancelling video selection.")
-            .setColor(color)
-            message.channel.send({embed: noPick});
-            msgtoDelete.delete()
-            return;
-          }
-          const videoIndex = parseInt(response.first().content);
-          var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-        } catch (err) {
-          console.error(err);
-          return message.channel.send('🆘 I could not obtain any search results.');
-        } 
-      }
-      return handleVideo(video, message, voiceChannel);
-    }
+        // Validate info
+        let validate = await ytdl.validateURL(args[0]);
 
-    // Time for the functions
+        // The episode covers using search command we created last episode, this process is extremely simple and only requires two lines of code.
 
-async function handleVideo(video, message, voiceChannel, playlist = false) {
-  const serverQueue = queue.get(message.guild.id);
-  console.log(video);
-  const song = {
-    id: video.id,
-    title: video.title,
-    url: `https://www.youtube.com/watch?v=${video.id}`,
-    durationh: video.duration.hours,
-    durationm: video.duration.minutes,
-    durations: video.duration.seconds,
-  };
-  if (!serverQueue) {
-    const queueConstruct = { 
-      textChannel: message.channel,
-      voiceChannel: voiceChannel,
-      connection: null,
-      skippers: [],
-      songs: [],
-      volume: 50,
-      playing: true
-    };
-    queue.set(message.guild.id, queueConstruct);
+        // This episode can also be a challenge for you, here's now it's done: (try to pause the video and do it yourself, i'll show how after)
 
-    queueConstruct.songs.push(song);
+        // Hopefully you tried to do it on your own, here's now how to do it:
+    
+        // Check validation
+        if(!validate) {
 
-    try {
-      var connection = await voiceChannel.join();
-      queueConstruct.connection = connection;
-      play(message.guild, queueConstruct.songs[0]);
-    } catch (error) {
-      console.error(`I could not join the voice channel: ${error}`);
-      queue.delete(message.guild.id);
-      return message.channel.send(`I could not join the voice channel: ${error}`);
-    }
-  } else {
-    serverQueue.songs.push(song);
-    console.log(serverQueue.songs);
-    if (playlist) return undefined;
-    else return message.channel.send(`✅ **${song.title}** has been added to the queue!`);
-  }
-  return undefined;
-}
+           // Instead of sending message that it isn't correct we want to require the search command, exactly like we do in our main file
+           let commandFile = require(`./search.js`); // We aren't specifying the commands folder since we're already there.
+           return commandFile.run(client, message, args, ops); // This will pass the same variables into the command
 
-function play(guild, song) {
-  const serverQueue = queue.get(guild.id);
-
-  if (!song) {
-    serverQueue.voiceChannel.leave();
-    queue.delete(guild.id);
-    return;
-  }
-  console.log(serverQueue.songs);
-
-const dispatcher = serverQueue.connection.playStream(yt(song.url))
-        .on('end', reason => {
-            if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-            else console.log(reason);
-            serverQueue.songs.shift();
-            setTimeout(() => {
-                play(guild, serverQueue.songs[0]);
-            }, 250);
+           // We also want to make sure it returns, since it will be running this file again at a later date.
+           // Now, we can test it!
+           
+        }
+    
+        // We also need to define info, we can do that here -- It will store the video info
+        let info = await ytdl.getInfo(args[0]);
+    
+        // Essentialy, everything under the validate statement will be changed
+    
+        // First, we need to fetch the active -- Also, if it's not defined it will be hold {}
+        let data = ops.active.get(message.guild.id) || {};
+        
+        // Next, we need to update the data
+        if (!data.connection) data.connection = await message.member.voiceChannel.join(); // If there isn't a connection create one
+        if (!data.queue) data.queue = []; // If there isn't a query array, create one
+        data.guildID = message.guild.id; // This one won't be reset over, so we can just set it whenever we run this
+        
+        // Next, we need to add the song to the queue
+        data.queue.push({
+            songTitle: info.title,
+            requester: message.author.tag,
+            url: args[0],
+            announceChannel: message.channel.id
         })
-        .on('error', error => console.error(error));
-    dispatcher.setVolumeLogarithmic(serverQueue.volume / 50);
-
-    //Modified playing messages that give you the song duration!
-
-    let durations = song.durations - 1
-  var secondslength = Math.log(durations) * Math.LOG10E + 1 | 0;
-  var mlength = Math.log(song.durationm) * Math.LOG10E + 1 | 0;
-  if(song.durationh !== 0) {
-    if(secondslength == 1 || secondslength == 0) {
-      if(mlength == 1 || mlength == 0) {
-      return serverQueue.textChannel.send(`🎶 Now playing: **${song.title}** (${song.durationh}:0${song.durationm}:0${durations})`);
-  }}}
-  if(song.durationh !== 0) {
-    if(secondslength == 1 || secondslength == 0) {
-      if(mlength !== 1 || mlength !== 0) {
-        const embed2 = new Discord.RichEmbed()
-        .setDescription(`🎶 Now playing: **${song.title}** (${song.durationh}:${song.durationm}:0${durations})`)
-        .setColor(color);
-
-      return serverQueue.textChannel.send(embed2);
-    }}};
-    if(song.durationh !== 0) {
-      if(mlength == 1 || mlength == 0) {
-        if(secondslength !== 1 || secondslength !== 0) {
-          const embed3 = new Discord.RichEmbed()
-        .setDescription(`🎶 Now playing: **${song.title}** (${song.durationh}:0${song.durationm}:${durations})`)
-        .setColor(color);
-
-        return serverQueue.textChannel.send(embed3);
-    }}}
-    if(song.durationh !== 0) {
-      if(mlength !== 1 || mlength !== 0) {
-        if(secondslength !== 1 || secondslength !== 0) {
-          const embed4 = new Discord.RichEmbed()
-          .setDescription(`🎶 Now playing: **${song.title}** (${song.durationh}:${song.durationm}:${durations})`)
-          .setColor(color);
-
-        return serverQueue.textChannel.send(embed4);
-    }}}
-    if(song.durationh == 0 && song.durationm !== 0) {
-      if(secondslength == 1 || secondslength == 0) {
-          const embed5 = new Discord.RichEmbed()
-          .setDescription(`🎶 Now playing: **${song.title}** (${song.durationm}:0${durations})`)
-          .setColor(color);
-
-        return serverQueue.textChannel.send(embed5);
-    }}
-    if(song.durationh == 0 && song.durationm !== 0) {
-      if(secondslength !== 1 || secondslength !== 0) {
-        const embed6 = new Discord.RichEmbed()
-        .setDescription(`🎶 Now playing: **${song.title}** (${song.durationm}:${durations})`)
-        .setColor(color);
-
-        return serverQueue.textChannel.send(embed6);
-    }}
-    if(song.durationh == 0 && song.durationm == 0 && song.durations !== 0) {
-        const embed7 = new Discord.RichEmbed()
-        .setDescription(`🎶 Now playing: **${song.title}** (${durations} Seconds)`)
-        .setColor(color);
-
-      return serverQueue.textChannel.send(embed7);
-    } else {
-        const embed8 = new Discord.RichEmbed()
-        .setDescription(`🎶 Now playing: **${song.title}**`)
-        .setColor(color);
-
-      return serverQueue.textChannel.send(embed8);
+    
+        // If there isn't a dispatcher already created, run the play function
+        if (!data.dispatcher) play(client, ops, data); // We will define this later
+        else { // Altough, if there is already a dispatcher, run this
+            
+            // Send added to queue message
+            message.channel.send(`Added to Queue: ${info.title} | Requested By: ${message.author.id}`);
+    
+        }
+    
+        // Finally, update the map
+        ops.active.set(message.guild.id, data);
+    
+    } // Finally, remember to do these two things...
+    
+    // Now, we can define the play function
+    async function play(client, ops, data) { // It will take these 3 parameters, so when calling it when need to pass those through
+    
+        // First, we can send the now playing message
+        client.channels.get(data.queue[0].announceChannel).send(`Now Playing: ${data.queue[0].songTitle} | Requested By: ${data.queue[0].requester}`);
+    
+        // Next, update the dispatcher data
+        data.dispatcher = await data.connection.playStream(ytdl(data.queue[0].url, { filter: 'audioonly'}));
+        data.dispatcher.guildID = data.guildID;
+    
+        // Finally, create a listener event that will run when the song ends
+        data.dispatcher.once('finish', function() {
+            // When this happens, we want to run a finish function
+            finish(client, ops, this); //  We also want to pass these 3 parameters
+        })
+    
     }
-}
-} // I had this setup somewhere else so if u see me paste something in that's why
-
+    
+    function finish(client, ops, dispatcher) {
+    
+        // First, fetch the guild object from the map
+        let fetched = ops.active.get(dispatcher.guildID);
+    
+        // Remove first item in queue
+        fetched.queue.shift();
+    
+        // Then, check if the queue is empty
+        if (fetched.queue.length > 0) { // If not, run this
+            
+            // Update the map with the new queue
+            ops.active.set(dispatcher.guildID, fetched);
+    
+            // Finally, run the play function again which starts the next song
+            play(client, ops, fetched); // Remember to pass these 3 parameters
+    
+        } else { // This will run if the queue is empty
+            
+            // Delete the guild object from the map
+            ops.active.delete(dispatcher.guildID);
+    
+            // Leave the voice channel
+            let vc = client.guilds.get(dispatcher.guildID).me.voiceChannel; // This get voiceChannel of the bot in the guild
+            if (vc) vc.leave(); // If it's in a voice channel, leave it
+    
+        } // Remember, to intially pass the play arguments when we set it earlier
+    
+    }
