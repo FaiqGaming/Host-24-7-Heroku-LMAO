@@ -1,6 +1,6 @@
 const prefixes = require("../prefixes.json");
 const Discord = require("discord.js");
-const key = process.env.SERVER_YOUTUBE);
+const key = process.env.SERVER_YOUTUBE;
 const fs = require("fs"); 
 const moment = require('moment');
 const yt = require('ytdl-core');
