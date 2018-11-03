@@ -67,6 +67,7 @@
     "command": "^0.0.5",
     "quick.db": "^6.3.2",
     "quick-db": "^1.0.5",
+    "split": "^1.0.1",
     "quickdb": "^1.0.5",
     "request-promise-native": "^1.0.5",
     "logger": "^0.0.1",
