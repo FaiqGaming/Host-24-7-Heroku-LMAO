@@ -31,6 +31,7 @@ const ownerID = '297130271864520705';
 const active = new Map();
 let cooldown = new Set();
 let cdseconds = 5;
+const queue = new Map();
 const func = require("./functions.js");
 const db = require("quick.db");
 const client = new Discord.Client();
