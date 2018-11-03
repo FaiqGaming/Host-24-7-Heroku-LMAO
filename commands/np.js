@@ -1,6 +1,6 @@
 const cfg = require("../config.json");
 const Discord = require("discord.js");
-const key = process.env.YT_API;
+const key = process.env.SERVER_YOUTUBE;
 const fs = require("fs"); 
 const moment = require('moment');
 const yt = require('ytdl-core');
@@ -9,7 +9,7 @@ const youtube = new YouTube(key);
 const opus = require("opusscript");
 const gyp = require("node-gyp");
 
-exports.run = async(music, message, args, color, queue) => {
+exports.run = async(message, args, color, queue) => {
   const args1 = message.content.split(' ');
   const searchString = args1.slice(1).join(' ');
   const url = args1[1] ? args1[1].replace(/<(.+)>/g, '$1') : '';
