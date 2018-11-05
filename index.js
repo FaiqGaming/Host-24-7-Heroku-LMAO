@@ -184,7 +184,7 @@ client.on("message", async message => {
   }
     fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
       if(err) console.log(err)  
-    })
+  })
   
   if (!message.content.startsWith(prefix)) return;
   let messageArray = message.content.split(" "); // Set The Our Message I Dont Know :v
