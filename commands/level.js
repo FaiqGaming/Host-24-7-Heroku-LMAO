@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
 }
   let curxp = xp[message.author.id].xp;
   let curlvl = xp[message.author.id].level;
-  let nxtLvlXp = curlvl * 300;
+  let nxtLvlXp = curlvl * 500;
   let difference = nxtLvlXp - curxp;
 
   let lvlEmbed = new Discord.RichEmbed()
