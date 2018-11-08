@@ -4,9 +4,23 @@
 
 ```
 npm install discord.js --save
-npm ini -y
+npm init -y
 ```
 
 ## Deploying In Heroku
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+```
+heroku login
+heroku open
+git push heroku master
+```
+
+## Installing NodeJS
+
+[NodeJS](https://www.nodejs.org/en/)
+```
+Installing NodeJS
+Now You Can Using NPM Now
+```
