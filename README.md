@@ -1,2 +1,2 @@
 # Host-24-7-Heroku-LMAO COPYRIGHT
-&copy: CopyRight Alrights Reserved.
+[![N|Solid](https://nodei.co/npm/discord.js.png?downloads=true&stars=true)](https://www.npmjs.org/package/discord.js)
