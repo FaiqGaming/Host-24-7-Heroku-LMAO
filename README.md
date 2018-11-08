@@ -1,1 +1,1 @@
-# Host-24-7-Heroku-LMAO
+# Host-24-7-Heroku-LMAO COPYRIGHT
