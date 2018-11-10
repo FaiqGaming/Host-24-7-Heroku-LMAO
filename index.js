@@ -545,29 +545,27 @@ if(cmd === `hug`){
     })
   } else
 
-  if(cmd === `serverinfo`){
 
-    message.delete()
-    const verificationLevel = message.guild.verificationLevel;
-    const verificationLevels = ['None', 'Easy', 'Medium', 'High', 'Extreme']
-    let sicon = message.guild.iconURL;
-    let embed = new Discord.RichEmbed()
+                if(cmd === 'serverinfo')
+                {
+                    let embed = new Discord.RichEmbed()
+                    .setAuthor(`${message.guild.name}`, `${message.guild.iconURL ? message.guild.iconURL : ""}`)
+                    .setDescription('Here is the server information: ')
+                    .setThumbnail(`${message.guild.iconURL ? message.guild.iconURL : ""}`)
+                    .addField('Server Name: ', message.guild.name, true)
+                    .addField('Server ID: ', message.guild.id, true)
+                    .addField('Server Owner: ', `${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`, true)
+                    .addField('Server Region: ', servico[`${message.guild.region}`], true)
+                    .addField('Members: ', `${message.guild.members.filter(mb => mb.user.bot === false).size} users & ${message.guild.members.filter(mb => mb.user.bot === true).size} bots`, true)
+                    .addField('Channels: ', `${message.guild.channels.findAll("type", "text").length} text & ${message.guild.channels.findAll("type", "voice").length} voice`, true)
+                    .addField('Server Roles: ', `${message.guild.roles.size}`, true)
+                    .addField('Server Emojis: ', `${message.guild.emojis.size}`, true)
+                    .addField('Verification Level: ', verlev[`${message.guild.verificationLevel}`], true)
+                    .addField('Server Created: ', new Date(message.guild.createdAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
+                    .setColor('#FFD800')
+                    message.channel.sendMessage(embed)
 
-    .setColor('RANDOM')
-    .setTitle(`${message.guild.name}'s ServerInfo`)
-    .setThumbnail(message.guild.iconURL)
-    .addField('Server Owner', `<@${message.guild.owner.user.id}>`)
-    .addField("Discord Server Name", message.guild.name)
-    .addField("Created The Discord Server In", message.guild.createdAt)
-    .addField("You Has Joined The Discord Server", message.member.joinedAt)
-    .addField("Total Members On Discord Server", `${message.guild.memberCount}`)
-    .addField("Server Region Discord Server", message.guild.region)
-    .addField("AFK Channel", message.guild.afkChannel)
-    .addField("Verification Level", verificationLevels[message.guild.verificationLevel])
-    .addField("Channels Server", `${message.guild.channels.filter(channel => channel.type === 'voice').size} Voice ${message.guild.channels.filter(channel => channel.type === `text`).size} Text`)
-
-    message.channel.send(embed);
-  }
+};
   
   if(cmd === `serverroles`){
     let embed = new Discord.RichEmbed()
