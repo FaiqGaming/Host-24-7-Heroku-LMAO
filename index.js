@@ -66,6 +66,23 @@ const ColorMap =
                     'offline' : 'Offline',
                     'streaming' : 'Streaming'
                 } 
+                
+                const servico =
+                {
+                    'singapore' : ':flag_sg: Singapore',
+                    'brazil' : ':flag_br: Brazil',
+                    'eu-central' : ':flag_eu: Central Europe',
+                    'hongkong' : ':flag_hk: Hong Kong',
+                    'japan' : ':flag_jp: Japan',
+                    'russia' : ':flag_ru: Russia',
+                    'southafrica' : ':flag_za: South Africa',
+                    'sydney' : ':flag_au: Sydney, Australia',
+                    'us-central' : ':flag_us: US Central',
+                    'us-east' : ':flag_us: US East',
+                    'us-south' : ':flag_us: US South',
+                    'us-west' : ':flag_us: US West',
+                    'eu-west' : ':flag_eu: Western Europe'
+               }
 
 function changing_status() {
   let status = [`Say (help || Released Now!`, `With ${client.users.size} Users`, `With ${client.guilds.size} Server`, `With ${client.channels.size} Channels`, `24/7 Online Forever`, `Hosted In Heroku`]
