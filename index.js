@@ -546,8 +546,7 @@ if(cmd === `hug`){
   } else
 
 
-                if(cmd === 'serverinfo')
-                {
+                if(cmd === 'serverinfo'){
                     let embed = new Discord.RichEmbed()
                     .setAuthor(`${message.guild.name}`, `${message.guild.iconURL ? message.guild.iconURL : ""}`)
                     .setDescription('Here is the server information: ')
@@ -564,8 +563,7 @@ if(cmd === `hug`){
                     .addField('Server Created: ', new Date(message.guild.createdAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''), true)
                     .setColor('#FFD800')
                     message.channel.sendMessage(embed)
-
-};
+                   }
   
   if(cmd === `serverroles`){
     let embed = new Discord.RichEmbed()
