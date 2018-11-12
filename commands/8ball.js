@@ -1,19 +1,3 @@
-{
-  "name": "tryhard",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "active": "^0.5.6",
-    "array-sort": "^1.0.0",
-    "audit": "0.0.6",
-    "bufferutil": "^4.0.0",
-    "db": "^1.0.7",
-    "dbl": "^0.1.12",
-    "dblapi.js": "^2.2.0",
-    "discord.js": "^11.4.2",
-    "discord.js-commando": "^0.10.0",
-    "express": "^4.16.4",
 const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
@@ -38,5 +22,6 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
+    aliases: "quest",
     name: "8ball"
 }
