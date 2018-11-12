@@ -65,7 +65,17 @@ const ColorMap =
                     'dnd' : 'Do Not Disturb',
                     'offline' : 'Offline',
                     'streaming' : 'Streaming'
-                } 
+                }
+                const verlev = 
+                {
+                    '0' : 'None',
+                    '1' : 'Low',
+                    '2' : 'Medium',
+                    '3' : 'High',
+                    '4' : 'Very High'
+
+                }
+
                 
                 const servico =
                 {
