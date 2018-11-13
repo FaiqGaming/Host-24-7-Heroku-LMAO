@@ -34,8 +34,6 @@ let cdseconds = 5;
 const func = require("./functions.js");
 const db = require("quick.db");
 const client = new Discord.Client();
-client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
 //ini sourcenya
 const ColorMap = 
                 {
@@ -104,23 +102,6 @@ function changing_status() {
 
 client.on('ready', () => {
   console.log(`${client.user.tag} Bot Has Online Now With Player Using ${client.users.size} Users And Using ${client.channels.size} Channels And ${client.guilds.size} Servers!`);
-  fs.readdir("./commands", (err, files) => {
-    if (err) console.error(err);
-
-    let jsfile = files.filter(f => f.endsWith('.js'));
-    if (jsfile.length <= 0) {
-        console.log("Commands file empty.");
-        return;
-    }
-
-    jsfile.forEach((f, i) => {
-        var props = require(`./commands/${f}`);
-        console.log(`Found ${f}, loading ${f.replace('.js', '')} command.`);
-        client.commands.set(props.help.name, props);
-        if (props.conf.aliases.length === 0) return;
-        props.conf.aliases.forEach(alias => client.aliases.set(alias, props.help.name));
-    });
-});
   client.user.setStatus('dnd');
   setInterval(changing_status, 9000);
 })
