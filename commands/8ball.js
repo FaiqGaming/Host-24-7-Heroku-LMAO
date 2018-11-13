@@ -22,6 +22,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    aliases: "quest",
     name: "8ball"
 }
