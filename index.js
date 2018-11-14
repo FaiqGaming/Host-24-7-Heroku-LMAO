@@ -207,7 +207,7 @@ client.on("message", async message => {
     .setColor('RED')
     .addField("New Level", curlvl + 1);
     
-    message.channel.send(lvlup).then(msg => {message.delete(5000)});
+    message.channel.send(lvlup).then(msg => {msg.delete(5000)});
   }
     fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
       if(err) console.log(err)  
