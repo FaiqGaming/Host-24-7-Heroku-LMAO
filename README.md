@@ -27,4 +27,4 @@ Now You Can Using NPM Now
 
 Official Server
 
-[![Discord server](https://discordapp.com/api/guilds/499839643974631455/embed.png?style=banner4)](https://discord.gg/JPtnznG)
+[![Discord server](https://discordapp.com/api/guilds/499839643974631455/widget.json)(https://discord.gg/JPtnznG)
