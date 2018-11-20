@@ -26,9 +26,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Reason", rreason);
 
     let reportschannel = message.guild.channels.find(`name`, "💬server▪log💬");
-    let repochannel = message.guild.channels.find(`name`, "➢♦-ᴍᴏᴅᴇʀᴀᴛɪᴏɴ-ʟᴏɢs-♦");
     if(!reportschannel) return message.channel.send("Couldn't Find 💬server▪log💬 Channel.");
-    if(!repochannel) return message.channel.send("Couldn't Find ➢♦-ᴍᴏᴅᴇʀᴀᴛɪᴏɴ-ʟᴏɢs-♦ Channel.");
     message.channel.send(`${rUser} Has Been Reported By ${message.author} Reason: ${rreason}`);
     reportschannel.send(reportEmbed);
 
