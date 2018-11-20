@@ -27,8 +27,6 @@ const translate = require('google-translate-api');
 const prefix = '(';
 const fs = require("fs");
 const YouTube = require('simple-youtube-api');
-const {YouTubeAPIKey} = require(process.env.SERVER_YOUTUBE);
-const config = require('./settiings/config.json');
 const ownerID = '297130271864520705';
 const active = new Map();
 let cooldown = new Set();
@@ -36,16 +34,7 @@ let cdseconds = 5;
 const func = require("./functions.js");
 const db = require("quick.db");
 const client = new Discord.Client();
-
-require('./global/functions')(bot, utils, ytdl, config);
-
-client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
-client.youtube = new YouTube(process.env.SERVER_YOUTUBE); // YouTube Client
-client.queue = new Map() // Music Queue
-client.votes = new Map(); // Vote Skip
-ready.ready(client);
-message.message(client, utils, config, discord);
 
 const ColorMap = 
                 {
