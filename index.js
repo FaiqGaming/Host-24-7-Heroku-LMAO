@@ -24,7 +24,6 @@ let coins = require("./coins.json");
 let xp = require("./xp.json");
 let purple = botconfig.purple;
 const translate = require('google-translate-api');
-const queue = new Map();
 const prefix = '(';
 const fs = require("fs");
 const YouTube = require('simple-youtube-api');
@@ -40,6 +39,14 @@ const db = require("quick.db");
 const client = new Discord.Client();
 
 require('./global/functions')(bot, utils, ytdl, config);
+
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+client.youtube = new YouTube(YouTubeAPIKey); // YouTube Client
+client.queue = new Map() // Music Queue
+client.votes = new Map(); // Vote Skip
+ready.ready(client);
+message.message(client, utils, config, discord);
 
 const ColorMap = 
                 {
