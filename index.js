@@ -221,6 +221,10 @@ client.on("message", async message => {
   let sender = message.author;
   let cmd = args.shift().toLowerCase();
   if (!message.content.startsWith(prefix)) return;
+    var searchString = args.slice(1).join(' ');
+	var url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
+	var serverQueue = queue.get(message.guild.id);
+switch (args[0].toLowerCase()) {
   
   if (message.content.includes(message.mentions.users.first())) {
     client.afk.forEach(key => {
@@ -232,6 +236,7 @@ client.on("message", async message => {
       }
     })
   }
+}
 
   client.afk.forEach(key => {
     if (message.author.id == key.id) {
