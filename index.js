@@ -242,7 +242,6 @@ client.on("message", async message => {
       }
     })
   }
-}
 
   client.afk.forEach(key => {
     if (message.author.id == key.id) {
