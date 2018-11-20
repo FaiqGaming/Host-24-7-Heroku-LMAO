@@ -26,7 +26,11 @@ let purple = botconfig.purple;
 const translate = require('google-translate-api');
 const queue = new Map();
 const prefix = '(';
-const fs = require("fs")
+const fs = require("fs");
+const YouTube = require('simple-youtube-api');
+const {YouTubeAPIKey} = require('./settiings/credentials.json');
+const config = require('./settiings/config.json');
+const utils = require('./global/utils');
 const ownerID = '297130271864520705';
 const active = new Map();
 let cooldown = new Set();
@@ -34,7 +38,9 @@ let cdseconds = 5;
 const func = require("./functions.js");
 const db = require("quick.db");
 const client = new Discord.Client();
-//ini sourcenya
+
+require('./global/functions')(bot, utils, ytdl, config);
+
 const ColorMap = 
                 {
                     'online' : '#00FF00',
