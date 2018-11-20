@@ -29,7 +29,6 @@ const fs = require("fs");
 const YouTube = require('simple-youtube-api');
 const {YouTubeAPIKey} = require('./settiings/credentials.json');
 const config = require('./settiings/config.json');
-const utils = require('./global/utils');
 const ownerID = '297130271864520705';
 const active = new Map();
 let cooldown = new Set();
