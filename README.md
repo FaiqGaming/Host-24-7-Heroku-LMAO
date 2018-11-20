@@ -24,3 +24,7 @@ git push heroku master
 Installing NodeJS
 Now You Can Using NPM Now
 ```
+
+Official Server
+
+[![Discord server](https://discordapp.com/api/guilds/416512197590777857/embed.png?style=banner4)](https://discord.gg/MgVaazZ)
