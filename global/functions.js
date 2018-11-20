@@ -1,5 +1,5 @@
 const fs = require('fs');
-module.exports = (bot, utils, ytdl, config) => {
+module.exports = (client, utils, ytdl, config) => {
 
     fs.readdir("./commands/", (err, files) => {
 
@@ -12,20 +12,20 @@ module.exports = (bot, utils, ytdl, config) => {
         jsfiles.forEach((f, i) => {
             let props = require(`../commands/${f}`);
             console.log(`${i + 1}: ${f} loaded!`);
-            bot.commands.set(props.help.name, props);
+            client.commands.set(props.help.name, props);
             props.help.aliases.forEach(alias => {
-                bot.aliases.set(alias, props.help.name);
+                client.aliases.set(alias, props.help.name);
             });
         });
     });
 
-    bot.loadCommand = (commandName) => {
+    client.loadCommand = (commandName) => {
         try {
             let props = require(`../commands/${commandName}`);
-            if (props.init) props.init(bot);
-            bot.commands.set(commandName, props);
+            if (props.init) props.init(client);
+            client.commands.set(commandName, props);
             props.help.aliases.forEach(alias => {
-                bot.aliases.set(alias, props.help.name);
+                client.aliases.set(alias, props.help.name);
             });
             return false;
         } catch (err) {
@@ -33,11 +33,11 @@ module.exports = (bot, utils, ytdl, config) => {
         }
     };
 
-    bot.unloadCommand = async (commandName) => {
+    client.unloadCommand = async (commandName) => {
         try {
             if (!commandName) return `The command \`${commandName}\` doesn"t seem to exist. Try again!`;
 
-            if (commandName.shutdown) await commandName.shutdown(bot);
+            if (commandName.shutdown) await commandName.shutdown(client);
             delete require.cache[require.resolve(`../commands/${commandName}.js`)];
             return false;
         } catch (err) {
@@ -45,8 +45,8 @@ module.exports = (bot, utils, ytdl, config) => {
         }
     };
 
-    bot.handleVideo = async (video, message, vc, playlist = false) => {
-        let queue = bot.queue.get(message.guild.id);
+    client.handleVideo = async (video, message, vc, playlist = false) => {
+        let queue = client.queue.get(message.guild.id);
         let music = {
             id: video.id,
             title: video.title,
@@ -67,16 +67,16 @@ module.exports = (bot, utils, ytdl, config) => {
                 voters: []
             };
 
-            bot.queue.set(message.guild.id, queueConstruct);
-            bot.votes.set(message.guild.id, voteConstruct)
+            client.queue.set(message.guild.id, queueConstruct);
+            client.votes.set(message.guild.id, voteConstruct)
             queueConstruct.musics.push(music);
 
             try {
                 var connection = await vc.join();
                 queueConstruct.connection = connection;
-                bot.play(message.guild, queueConstruct.musics[0]);
+                client.play(message.guild, queueConstruct.musics[0]);
             } catch (err) {
-                bot.queue.delete(message.guild.id);
+                client.queue.delete(message.guild.id);
                 console.error(`I could not join your voice channel: ${err}`);
             }
         } else {
@@ -87,13 +87,13 @@ module.exports = (bot, utils, ytdl, config) => {
         return;
     }
 
-    bot.play = (guild, music) => {
-        let queue = bot.queue.get(guild.id);
-        let votes = bot.votes.get(guild.id)
+    client.play = (guild, music) => {
+        let queue = client.queue.get(guild.id);
+        let votes = client.votes.get(guild.id)
         if (!music) {
             queue.voiceChannel.leave();
-            bot.queue.delete(guild.id);
-            bot.votes.delete(guild.id);
+            client.queue.delete(guild.id);
+            client.votes.delete(guild.id);
             return queue.textChannel.send(`🎵 Music playback has ended`);
         }
 
@@ -103,7 +103,7 @@ module.exports = (bot, utils, ytdl, config) => {
                 votes.votes = 0;
                 votes.voters = [];
                 setTimeout(() => {
-                    bot.play(guild, queue.musics[0]);
+                    client.play(guild, queue.musics[0]);
                 }, 250);
             })
             .on('error', err => console.error(err));
