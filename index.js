@@ -27,7 +27,7 @@ const translate = require('google-translate-api');
 const prefix = '(';
 const fs = require("fs");
 const YouTube = require('simple-youtube-api');
-const {YouTubeAPIKey} = require('./settiings/credentials.json');
+const {YouTubeAPIKey} = require(process.env.SERVER_YOUTUBE);
 const config = require('./settiings/config.json');
 const ownerID = '297130271864520705';
 const active = new Map();
@@ -41,7 +41,7 @@ require('./global/functions')(bot, utils, ytdl, config);
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
-client.youtube = new YouTube(YouTubeAPIKey); // YouTube Client
+client.youtube = new YouTube(process.env.SERVER_YOUTUBE); // YouTube Client
 client.queue = new Map() // Music Queue
 client.votes = new Map(); // Vote Skip
 ready.ready(client);
