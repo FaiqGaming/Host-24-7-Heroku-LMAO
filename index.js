@@ -1,7 +1,9 @@
 const Commando = require("discord.js-commando");
 const Discord = require("discord.js");
 const botconfig = require("./botconfig.json");
-const ytdl = require("ytdl-core");
+const YouTube = require('simple-youtube-api');
+const ytdl = require('ytdl-core');
+const youtube = new YouTube(process.env.SERVER_YOUTUBE);
 const superagent = require("snekfetch");
 const snek = require('snekfetch');
 const oneLine = require("common-tags");
