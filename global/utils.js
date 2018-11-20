@@ -1,4 +1,4 @@
-let disc;
+let Disc;
 let c;
 let conf;
 let msg;
@@ -7,8 +7,8 @@ let g;
 
 module.exports = {
 
-    load: (discord, client, config, message, args, guild) => {
-        disc = discord;
+    load: (Discord, client, config, message, args, guild) => {
+        disc = Discord;
         c = client;
         conf = config;
         msg = message;
