@@ -21,7 +21,7 @@ module.exports = {
     },
 
     no_perm: (error) => {
-        let embed = new disc.RichEmbed()
+        let embed = new Disc.RichEmbed()
             .setColor('#d30000')
             .setAuthor('ERROR: Insufficient Permissions!', c.user.displayAvatarURL)
             .setThumbnail(c.user.avatarURL)
@@ -32,7 +32,7 @@ module.exports = {
     },
 
     cmd_fail: (error, syntax) => {
-        let embed = new disc.RichEmbed()
+        let embed = new Disc.RichEmbed()
             .setColor("#8e0000")
             .setAuthor('ERROR: WRONG SYNTAX', c.user.displayAvatarURL)
             .setThumbnail(c.user.avatarURL)
