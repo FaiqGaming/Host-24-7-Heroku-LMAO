@@ -256,6 +256,8 @@ client.on("message", async message => {
 
   } catch (e) {
       console.log(e.stack);
+  } finally {
+      console.log(`${message.author.tag} Run The Command ${cmd}`);
   }
   
   if(cmd === `stats`){
