@@ -667,11 +667,6 @@ if(cmd === `hug`){
       message.channel.send(`Oh no an error occurred :( \`${e.message}\` try again later!`);
     }
   }
-  
-  if(cmd === ``){
-    message.delete()
-    message.channel.send("**Type (Help To Check Our Help Commands**");
-  }
 
   if(cmd === `dog`){
     let {body} = await superagent
@@ -920,8 +915,7 @@ if(cmd === `shorten`){
     message.delete()
     message.channel.send(say);
   }
-  
-  if (!cmd) return message.channel.send("invalid command");
+
 })
 
 client.login(process.env.BOT_TOKEN);
