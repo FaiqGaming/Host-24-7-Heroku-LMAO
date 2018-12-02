@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+const queue = new map();
+const db = require("quick.db");
 
 exports.run = async (client, message, args, color, prefix) => {
     if (message.author.id !== '297130271864520705' && message.author.id !== '297130271864520705') return message.channel.send(":x: You Can Run The Command You Are Not Developer");
