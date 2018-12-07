@@ -78,6 +78,11 @@ exports.run = async (client, message, args, ops) => {
         data.dispatcher = await data.connection.playStream(ytdl(data.queue[0].url, { filter: 'audioonly'}));
         data.dispatcher.guildID = data.guildID;
     
+        // Finally, create a listener event that will run when the song is Ending!
+        data.dispatcher.once('end', function() {
+            finish(client, ops, this);
+        })
+         
         // Finally, create a listener event that will run when the song ends
         data.dispatcher.once('finish', function() {
             // When this happens, we want to run a finish function
